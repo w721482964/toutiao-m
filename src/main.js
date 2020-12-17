@@ -5,6 +5,8 @@ import store from './store'
 // 加载Vant组件库
 import Vant from 'vant'
 
+import './utils/dayjs'
+
 // 加载Vant组件库样式
 import 'vant/lib/index.css'
 
