@@ -1,5 +1,5 @@
 <template>
-  <div class="article-list">
+  <div class="article-list" ref="article-list">
     <van-pull-refresh
       :success-text="refreshSuccessText"
       v-model="isLoading"
@@ -31,6 +31,7 @@
 <script>
 import { getArticles } from '@/api/article'
 import AriticleItem from '@/components/index'
+import { debounce } from 'lodash'
 export default {
   name: 'ArticleList',
   components: {
@@ -49,8 +50,23 @@ export default {
       finished: false, // 控制加载结束的状态
       timestamp: null,
       isLoading: false,
-      refreshSuccessText: ''
+      refreshSuccessText: '',
+      scrollTop: 0 // 列表滚动到顶部的距离
     }
+  },
+  mounted () {
+    const articleList = this.$refs['article-list']
+    articleList.onscroll = debounce(() => {
+      this.scrollTop = articleList.scrollTop
+    }, 50)
+  },
+  // 任何缓存组件都可以使用这两个生命周期钩子
+  activated () {
+    // 把记录到顶部的距离重新设置回去
+    this.$refs['article-list'].scrollTop = this.scrollTop
+  },
+  deactivated () {
+    console.log('组件失去活动了')
   },
   methods: {
     async onLoad () {

@@ -36,3 +36,57 @@ export const getUserChannels = () => {
     url: '/app/v1_0/user/channels'
   })
 }
+
+// 获取用户频道列表
+export const addUserFllow = (userId) => {
+  return request({
+    method: 'POST',
+    url: '/app/v1_0/user/followings',
+    data: {
+      target: userId
+    }
+  })
+}
+
+// 获取用户频道列表
+export const deleteUserFllow = (userId) => {
+  return request({
+    method: 'DELETE',
+    url: `/app/v1_0/user/followings/${userId}`
+  })
+}
+
+// 获取用户个人资料
+export const getUserProfile = () => {
+  return request({
+    method: 'GET',
+    url: '/app/v1_0/user/profile'
+  })
+}
+
+// 修改昵称
+export const updateUserName = (data) => {
+  return request({
+    method: 'PATCH',
+    url: '/app/v1_0/user/profile',
+    data
+  })
+}
+
+// 修改性别
+export const updateUserGender = (data) => {
+  return request({
+    method: 'PATCH',
+    url: '/app/v1_0/user/profile',
+    data
+  })
+}
+
+// 修改出生
+export const updateUserPhoto = (data) => {
+  return request({
+    method: 'PATCH',
+    url: '/app/v1_0/user/photo',
+    data
+  })
+}

@@ -12,7 +12,9 @@
           :src="currentUser.photo"
         />
         <div class="name" slot="title">{{ currentUser.name }}</div>
-        <van-button class="updata-btn" size="small" round>编辑资料</van-button>
+        <van-button class="updata-btn" size="small" round to="/user/profile"
+          >编辑资料</van-button
+        >
       </van-cell>
       <van-grid :border="false" class="data-info">
         <van-grid-item class="data-info-item">
@@ -44,7 +46,16 @@
 
     <!-- 未登录 -->
     <div v-else class="not-login">
-      <div @click="$router.push('/login')">
+      <div
+        @click="
+          $router.push({
+            name: 'login',
+            query: {
+              redirect: '/my',
+            },
+          })
+        "
+      >
         <div class="mobile">
           <img src="./shouji.png" alt="" />
         </div>
@@ -57,7 +68,7 @@
       <van-grid-item class="nav-grid-item" icon="clock-o" text="历史" />
     </van-grid>
     <van-cell title="消息通知" is-link to="" />
-    <van-cell class="mb-4" title="小智同学" is-link to="" />
+    <van-cell class="mb-4" title="小智同学" is-link to="/user/chat" />
     <van-cell
       v-if="user"
       title="退出登录"
